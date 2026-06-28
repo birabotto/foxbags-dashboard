@@ -3,6 +3,7 @@ import { Edit, Plus, Trash } from "lucide-react";
 import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import { DataTable } from "@/app/components/ui/data-table";
+import { PageHeader } from "@/app/components/dashboard/page-header";
 
 type Product = {
   id: string;
@@ -79,18 +80,18 @@ export default function ProductsPage() {
   return (
     <div>
       <div className="mb-8 flex items-center justify-between">
-        <div>
-          <h1 className="text-4xl font-bold">Products</h1>
-
-          <p className="mt-3 text-zinc-500">Manage all Foxbags products.</p>
-        </div>
-
-        <Button>
-          <span className="flex items-center gap-2">
-            <Plus size={18} />
-            Add Product
-          </span>
-        </Button>
+        <PageHeader
+          title="Products"
+          description="Manage all Foxbags products."
+          action={
+            <Button>
+              <span className="flex items-center gap-2">
+                <Plus size={18} />
+                Add Product
+              </span>
+            </Button>
+          }
+        />
       </div>
 
       <DataTable columns={columns} data={products} />
