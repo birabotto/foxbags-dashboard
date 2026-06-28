@@ -1,41 +1,10 @@
 import { Edit, Plus, Trash } from "lucide-react";
 
+import { PageHeader } from "@/app/components/dashboard/page-header";
 import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import { DataTable } from "@/app/components/ui/data-table";
-import { PageHeader } from "@/app/components/dashboard/page-header";
-
-type Product = {
-  id: string;
-  name: string;
-  category: string;
-  minimumOrder: string;
-  status: "Active" | "Draft";
-};
-
-const products: Product[] = [
-  {
-    id: "1",
-    name: "Plastic Bag",
-    category: "Plastic",
-    minimumOrder: "500 units",
-    status: "Active",
-  },
-  {
-    id: "2",
-    name: "Paper Bag",
-    category: "Paper",
-    minimumOrder: "300 units",
-    status: "Active",
-  },
-  {
-    id: "3",
-    name: "Luxury Gift Bag",
-    category: "Luxury",
-    minimumOrder: "100 units",
-    status: "Draft",
-  },
-];
+import { products, type Product } from "@/lib/mock-data";
 
 const columns = [
   {
