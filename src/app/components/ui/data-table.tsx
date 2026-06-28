@@ -1,6 +1,9 @@
+import { ReactNode } from "react";
+
 type Column<T> = {
   key: keyof T;
   label: string;
+  render?: (value: T[keyof T], row: T) => ReactNode;
 };
 
 type DataTableProps<T> = {
@@ -28,11 +31,15 @@ export function DataTable<T extends { id: string }>({
         <tbody>
           {data.map((row) => (
             <tr key={row.id} className="border-t">
-              {columns.map((column) => (
-                <td key={String(column.key)} className="px-6 py-4">
-                  {String(row[column.key])}
-                </td>
-              ))}
+              {columns.map((column) => {
+                const value = row[column.key];
+
+                return (
+                  <td key={String(column.key)} className="px-6 py-4">
+                    {column.render ? column.render(value, row) : String(value)}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>

@@ -1,6 +1,18 @@
+import { Edit, Plus, Trash } from "lucide-react";
+
+import { Badge } from "@/app/components/ui/badge";
+import { Button } from "@/app/components/ui/button";
 import { DataTable } from "@/app/components/ui/data-table";
 
-const products = [
+type Product = {
+  id: string;
+  name: string;
+  category: string;
+  minimumOrder: string;
+  status: "Active" | "Draft";
+};
+
+const products: Product[] = [
   {
     id: "1",
     name: "Plastic Bag",
@@ -25,19 +37,60 @@ const products = [
 ];
 
 const columns = [
-  { key: "name", label: "Product" },
-  { key: "category", label: "Category" },
-  { key: "minimumOrder", label: "Minimum Order" },
-  { key: "status", label: "Status" },
+  {
+    key: "name",
+    label: "Product",
+  },
+  {
+    key: "category",
+    label: "Category",
+  },
+  {
+    key: "minimumOrder",
+    label: "Minimum Order",
+  },
+  {
+    key: "status",
+    label: "Status",
+    render: (value: Product[keyof Product]) => (
+      <Badge variant={value === "Active" ? "success" : "warning"}>
+        {String(value)}
+      </Badge>
+    ),
+  },
+  {
+    key: "id",
+    label: "Actions",
+    render: () => (
+      <div className="flex gap-2">
+        <button className="rounded-lg border p-2 hover:bg-zinc-100">
+          <Edit size={16} />
+        </button>
+
+        <button className="rounded-lg border p-2 text-red-500 hover:bg-red-50">
+          <Trash size={16} />
+        </button>
+      </div>
+    ),
+  },
 ] as const;
 
 export default function ProductsPage() {
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold">Products</h1>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-4xl font-bold">Products</h1>
 
-        <p className="mt-3 text-zinc-500">Manage all Foxbags products.</p>
+          <p className="mt-3 text-zinc-500">Manage all Foxbags products.</p>
+        </div>
+
+        <Button>
+          <span className="flex items-center gap-2">
+            <Plus size={18} />
+            Add Product
+          </span>
+        </Button>
       </div>
 
       <DataTable columns={columns} data={products} />
