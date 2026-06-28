@@ -1,7 +1,11 @@
+import { Navbar } from "@/app/components/navbar";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-zinc-900">
-      <section className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 text-center">
+      <Navbar />
+
+      <section className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 pt-20 text-center">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-orange-500">
           Foxbags
         </p>
