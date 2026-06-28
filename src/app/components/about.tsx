@@ -1,4 +1,28 @@
+import { BarChart3, CreditCard, ClipboardList } from "lucide-react";
+
 import { SectionTitle } from "@/app/components/section-title";
+import { Card } from "@/app/components/ui/card";
+
+const features = [
+  {
+    title: "Orders",
+    description:
+      "Track every order from quote request to production and delivery.",
+    icon: ClipboardList,
+  },
+  {
+    title: "Payments",
+    description:
+      "Use Stripe checkout to receive deposits and confirm payments.",
+    icon: CreditCard,
+  },
+  {
+    title: "Dashboard",
+    description:
+      "View revenue, customers, products, and order status in one place.",
+    icon: BarChart3,
+  },
+];
 
 export function About() {
   return (
@@ -11,26 +35,21 @@ export function About() {
         />
 
         <div className="grid gap-8 md:grid-cols-3">
-          <div className="rounded-2xl bg-white p-8 shadow-sm">
-            <h3 className="text-xl font-bold">Orders</h3>
-            <p className="mt-4 text-zinc-600">
-              Track every order from quote request to production and delivery.
-            </p>
-          </div>
+          {features.map((feature) => {
+            const Icon = feature.icon;
 
-          <div className="rounded-2xl bg-white p-8 shadow-sm">
-            <h3 className="text-xl font-bold">Payments</h3>
-            <p className="mt-4 text-zinc-600">
-              Use Stripe checkout to receive deposits and confirm payments.
-            </p>
-          </div>
+            return (
+              <Card key={feature.title}>
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-orange-600">
+                  <Icon size={26} />
+                </div>
 
-          <div className="rounded-2xl bg-white p-8 shadow-sm">
-            <h3 className="text-xl font-bold">Dashboard</h3>
-            <p className="mt-4 text-zinc-600">
-              View revenue, customers, products, and order status in one place.
-            </p>
-          </div>
+                <h3 className="text-xl font-bold">{feature.title}</h3>
+
+                <p className="mt-4 text-zinc-600">{feature.description}</p>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

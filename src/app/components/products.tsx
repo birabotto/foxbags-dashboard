@@ -1,3 +1,5 @@
+import { Package, Leaf, Gem } from "lucide-react";
+
 import { SectionTitle } from "@/app/components/section-title";
 import { Card } from "@/app/components/ui/card";
 
@@ -5,14 +7,17 @@ const products = [
   {
     name: "Plastic Bags",
     description: "Custom plastic bags for retail stores, events, and brands.",
+    icon: Package,
   },
   {
     name: "Paper Bags",
     description: "Eco-friendly paper packaging with custom sizes and printing.",
+    icon: Leaf,
   },
   {
     name: "Luxury Packaging",
     description: "Premium packaging solutions for boutique and luxury brands.",
+    icon: Gem,
   },
 ];
 
@@ -26,17 +31,21 @@ export function Products() {
       />
 
       <div className="grid gap-8 md:grid-cols-3">
-        {products.map((product) => (
-          <Card key={product.name}>
-            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-2xl">
-              📦
-            </div>
+        {products.map((product) => {
+          const Icon = product.icon;
 
-            <h3 className="text-xl font-bold">{product.name}</h3>
+          return (
+            <Card key={product.name}>
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-orange-600">
+                <Icon size={26} />
+              </div>
 
-            <p className="mt-4 text-zinc-600">{product.description}</p>
-          </Card>
-        ))}
+              <h3 className="text-xl font-bold">{product.name}</h3>
+
+              <p className="mt-4 text-zinc-600">{product.description}</p>
+            </Card>
+          );
+        })}
       </div>
     </section>
   );
