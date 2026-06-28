@@ -1,3 +1,4 @@
+"use client";
 import { Edit, Plus, Trash } from "lucide-react";
 
 import { PageHeader } from "@/app/components/dashboard/page-header";
@@ -5,6 +6,8 @@ import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import { DataTable } from "@/app/components/ui/data-table";
 import { products, type Product } from "@/lib/mock-data";
+import { useMemo, useState } from "react";
+import { SearchInput } from "@/app/components/ui/search-input";
 
 const columns = [
   {
@@ -46,8 +49,44 @@ const columns = [
 ] as const;
 
 export default function ProductsPage() {
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => {
+      const matchesSearch = product.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+      const matchesStatus =
+        statusFilter === "All" || product.status === statusFilter;
+
+      return matchesSearch && matchesStatus;
+    });
+  }, [search, statusFilter]);
   return (
     <div>
+      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="w-full md:max-w-sm">
+          <SearchInput value={search} onChange={setSearch} />
+        </div>
+
+        <div className="flex items-center gap-4">
+          <select
+            value={statusFilter}
+            onChange={(event) => setStatusFilter(event.target.value)}
+            className="rounded-xl border border-zinc-300 px-4 py-3"
+          >
+            <option>All</option>
+            <option>Active</option>
+            <option>Draft</option>
+          </select>
+
+          <p className="text-sm text-zinc-500">
+            {filteredProducts.length} products
+          </p>
+        </div>
+      </div>
       <div className="mb-8 flex items-center justify-between">
         <PageHeader
           title="Products"
@@ -63,7 +102,7 @@ export default function ProductsPage() {
         />
       </div>
 
-      <DataTable columns={columns} data={products} />
+      <DataTable columns={columns} data={filteredProducts} />
     </div>
   );
 }
