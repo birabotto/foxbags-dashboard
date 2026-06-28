@@ -1,3 +1,5 @@
+import { Button } from "@/app/components/ui/button";
+
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-orange-50 to-white">
@@ -16,18 +18,12 @@ export function Hero() {
         </p>
 
         <div className="mt-12 flex flex-col gap-4 sm:flex-row">
-          <a
-            href="/dashboard"
-            className="rounded-xl bg-orange-500 px-8 py-4 font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-600"
-          >
-            Open Dashboard
+          <a href="/dashboard">
+            <Button>Open Dashboard</Button>
           </a>
 
-          <a
-            href="#products"
-            className="rounded-xl border border-zinc-300 bg-white px-8 py-4 font-semibold text-zinc-900 transition hover:bg-zinc-100"
-          >
-            View Products
+          <a href="#products">
+            <Button variant="secondary">View Products</Button>
           </a>
         </div>
       </div>

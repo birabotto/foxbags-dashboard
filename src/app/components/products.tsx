@@ -1,4 +1,5 @@
 import { SectionTitle } from "@/app/components/section-title";
+import { Card } from "@/app/components/ui/card";
 
 const products = [
   {
@@ -26,20 +27,15 @@ export function Products() {
 
       <div className="grid gap-8 md:grid-cols-3">
         {products.map((product) => (
-          <div
-            key={product.name}
-            className="rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-          >
+          <Card key={product.name}>
             <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-2xl">
               📦
             </div>
 
-            <h3 className="text-xl font-bold text-zinc-900">{product.name}</h3>
+            <h3 className="text-xl font-bold">{product.name}</h3>
 
-            <p className="mt-4 leading-7 text-zinc-600">
-              {product.description}
-            </p>
-          </div>
+            <p className="mt-4 text-zinc-600">{product.description}</p>
+          </Card>
         ))}
       </div>
     </section>
