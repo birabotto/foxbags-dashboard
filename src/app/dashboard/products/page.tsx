@@ -9,6 +9,8 @@ import { products, type Product } from "@/lib/mock-data";
 import { useMemo, useState } from "react";
 import { SearchInput } from "@/app/components/ui/search-input";
 import { Select } from "@/app/components/ui/select";
+import { Input } from "@/app/components/ui/input";
+import { Modal } from "@/app/components/ui/modal";
 
 const columns = [
   {
@@ -52,7 +54,7 @@ const columns = [
 export default function ProductsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const matchesSearch = product.name
@@ -89,7 +91,7 @@ export default function ProductsPage() {
           title="Products"
           description="Manage all Foxbags products."
           action={
-            <Button>
+            <Button onClick={() => setIsModalOpen(true)}>
               <span className="flex items-center gap-2">
                 <Plus size={18} />
                 Add Product
@@ -100,6 +102,29 @@ export default function ProductsPage() {
       </div>
 
       <DataTable columns={columns} data={filteredProducts} />
+      <Modal
+        title="Add Product"
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <div className="space-y-4">
+          <Input label="Product name" placeholder="Plastic Bag" />
+
+          <Input label="Category" placeholder="Plastic" />
+
+          <Input label="Minimum order" placeholder="500 units" />
+
+          <Select label="Status" options={["Active", "Draft"]} />
+
+          <div className="flex justify-end gap-3 pt-4">
+            <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
+              Cancel
+            </Button>
+
+            <Button onClick={() => setIsModalOpen(false)}>Save Product</Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
