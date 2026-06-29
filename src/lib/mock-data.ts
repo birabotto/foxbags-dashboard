@@ -29,3 +29,35 @@ export const products: Product[] = [
     status: "Draft",
   },
 ];
+
+export type Customer = {
+  id: string;
+  name: string;
+  email: string;
+  company: string;
+  status: "Active" | "Inactive";
+};
+
+export const customers: Customer[] = [
+  {
+    id: "1",
+    name: "Ana Silva",
+    email: "ana@bloomboutique.com",
+    company: "Bloom Boutique",
+    status: "Active",
+  },
+  {
+    id: "2",
+    name: "Carlos Mendes",
+    email: "carlos@casaverde.com",
+    company: "Casa Verde",
+    status: "Active",
+  },
+  {
+    id: "3",
+    name: "Emily Carter",
+    email: "emily@northcoffee.com",
+    company: "North Coffee",
+    status: "Inactive",
+  },
+];
