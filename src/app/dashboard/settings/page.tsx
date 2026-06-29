@@ -1,6 +1,6 @@
 import { PageHeader } from "@/app/components/dashboard/page-header";
 import { Button } from "@/app/components/ui/button";
-
+import { Input } from "@/app/components/ui/input";
 export default function SettingsPage() {
   return (
     <div>
@@ -14,20 +14,20 @@ export default function SettingsPage() {
           <h2 className="text-xl font-bold">Business Information</h2>
 
           <div className="mt-6 space-y-4">
-            <input
-              className="w-full rounded-xl border px-4 py-3"
+            <Input
+              label="Business name"
               placeholder="Business name"
               defaultValue="Foxbags"
             />
 
-            <input
-              className="w-full rounded-xl border px-4 py-3"
+            <Input
+              label="Business email"
               placeholder="Business email"
               defaultValue="contact@foxbags.com"
             />
 
-            <input
-              className="w-full rounded-xl border px-4 py-3"
+            <Input
+              label="Phone number"
               placeholder="Phone number"
               defaultValue="+1 (416) 555-0198"
             />
