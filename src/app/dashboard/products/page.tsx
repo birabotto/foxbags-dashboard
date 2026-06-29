@@ -8,6 +8,7 @@ import { DataTable } from "@/app/components/ui/data-table";
 import { products, type Product } from "@/lib/mock-data";
 import { useMemo, useState } from "react";
 import { SearchInput } from "@/app/components/ui/search-input";
+import { Select } from "@/app/components/ui/select";
 
 const columns = [
   {
@@ -72,15 +73,11 @@ export default function ProductsPage() {
         </div>
 
         <div className="flex items-center gap-4">
-          <select
+          <Select
             value={statusFilter}
             onChange={(event) => setStatusFilter(event.target.value)}
-            className="rounded-xl border border-zinc-300 px-4 py-3"
-          >
-            <option>All</option>
-            <option>Active</option>
-            <option>Draft</option>
-          </select>
+            options={["All", "Active", "Draft"]}
+          />
 
           <p className="text-sm text-zinc-500">
             {filteredProducts.length} products
