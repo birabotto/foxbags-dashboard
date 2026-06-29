@@ -61,3 +61,47 @@ export const customers: Customer[] = [
     status: "Inactive",
   },
 ];
+
+export type Order = {
+  id: string;
+  customer: string;
+  product: string;
+  quantity: string;
+  status: "Pending" | "In Production" | "Completed" | "Shipped";
+  amount: string;
+};
+
+export const orders: Order[] = [
+  {
+    id: "1",
+    customer: "Bloom Boutique",
+    product: "Luxury Paper Bag",
+    quantity: "1,000 units",
+    status: "In Production",
+    amount: "$980",
+  },
+  {
+    id: "2",
+    customer: "Casa Verde",
+    product: "Eco Paper Bag",
+    quantity: "500 units",
+    status: "Pending",
+    amount: "$420",
+  },
+  {
+    id: "3",
+    customer: "North Coffee",
+    product: "Custom Plastic Bag",
+    quantity: "2,000 units",
+    status: "Completed",
+    amount: "$1,250",
+  },
+  {
+    id: "4",
+    customer: "Luna Beauty",
+    product: "Premium Gift Bag",
+    quantity: "750 units",
+    status: "Shipped",
+    amount: "$760",
+  },
+];
