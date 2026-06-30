@@ -55,8 +55,10 @@ export default function ProductsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [productList, setProductList] = useState(products);
+
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
+    return productList.filter((product) => {
       const matchesSearch = product.name
         .toLowerCase()
         .includes(search.toLowerCase());
@@ -66,7 +68,25 @@ export default function ProductsPage() {
 
       return matchesSearch && matchesStatus;
     });
-  }, [search, statusFilter]);
+  }, [productList, search, statusFilter]);
+
+  function handleAddProduct(formData: FormData) {
+    const name = String(formData.get("name"));
+    const category = String(formData.get("category"));
+    const minimumOrder = String(formData.get("minimumOrder"));
+    const status = String(formData.get("status")) as Product["status"];
+
+    const newProduct: Product = {
+      id: crypto.randomUUID(),
+      name,
+      category,
+      minimumOrder,
+      status,
+    };
+
+    setProductList((currentProducts) => [newProduct, ...currentProducts]);
+    setIsModalOpen(false);
+  }
   return (
     <div>
       <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -108,21 +128,46 @@ export default function ProductsPage() {
         onClose={() => setIsModalOpen(false)}
       >
         <div className="space-y-4">
-          <Input label="Product name" placeholder="Plastic Bag" />
+          <form action={handleAddProduct} className="space-y-4">
+            <Input
+              name="name"
+              label="Product name"
+              placeholder="Plastic Bag"
+              required
+            />
 
-          <Input label="Category" placeholder="Plastic" />
+            <Input
+              name="category"
+              label="Category"
+              placeholder="Plastic"
+              required
+            />
 
-          <Input label="Minimum order" placeholder="500 units" />
+            <Input
+              name="minimumOrder"
+              label="Minimum order"
+              placeholder="500 units"
+              required
+            />
 
-          <Select label="Status" options={["Active", "Draft"]} />
+            <Select
+              name="status"
+              label="Status"
+              options={["Active", "Draft"]}
+            />
 
-          <div className="flex justify-end gap-3 pt-4">
-            <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
-              Cancel
-            </Button>
+            <div className="flex justify-end gap-3 pt-4">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cancel
+              </Button>
 
-            <Button onClick={() => setIsModalOpen(false)}>Save Product</Button>
-          </div>
+              <Button type="submit">Save Product</Button>
+            </div>
+          </form>
         </div>
       </Modal>
     </div>
