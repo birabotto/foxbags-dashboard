@@ -76,6 +76,18 @@ export default function ProductsPage() {
     setIsModalOpen(true);
   }
 
+  function handleDeleteProduct(id: string) {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this product?",
+    );
+
+    if (!confirmDelete) return;
+
+    setProductList((currentProducts) =>
+      currentProducts.filter((product) => product.id !== id),
+    );
+  }
+
   function handleCloseModal() {
     setEditingProduct(null);
     setIsModalOpen(false);
@@ -118,6 +130,7 @@ export default function ProductsPage() {
 
           <button
             type="button"
+            onClick={() => handleDeleteProduct(product.id)}
             className="rounded-lg border p-2 text-red-500 hover:bg-red-50"
           >
             <Trash size={16} />
